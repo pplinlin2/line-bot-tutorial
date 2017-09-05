@@ -310,7 +310,7 @@ def handle_message(event):
                 TextSendMessage(text=content)
             )
         except Exception as e:
-            print str(e)
+            print(str(e))
     if event.message.text == "eyny":
         content = eyny_movie()
         line_bot_api.reply_message(
