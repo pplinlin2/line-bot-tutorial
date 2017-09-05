@@ -295,7 +295,13 @@ def handle_message(event):
     print("event.reply_token:", event.reply_token)
     print("event.message.text:", event.message.text)
     if event.message.text in ["Test", "test"]:
-        content = "User ID: {}\n".format(event.source.user_id)
+        content = ""
+        if hasattr(event.source, "user_id"):
+            content += "user ID: {}\n".format(event.source.user_id)
+        if hasattr(event.source, "room_id"):
+            content += "room ID: {}\n".format(event.source.room_id)
+        if hasattr(event.source, "group_id"):
+            content += "group ID: {}\n".format(event.source.group_id)
         line_bot_api.reply_message(
             event.reply_token, 
             TextSendMessage(text=content)
