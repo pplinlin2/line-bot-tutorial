@@ -303,8 +303,10 @@ def handle_message(event):
                 content += "room ID: {}\n".format(event.source.room_id)
             if hasattr(event.source, "group_id"):
                 content += "group ID: {}\n".format(event.source.group_id)
-                member_ids_res = line_bot_api.get_group_member_ids(event.source.group_id, 10)
-                content += "{}".format(str(member_ids_res))
+                profile = line_bot_api.get_group_member_profile(event.source.group_id, event.source.user_id)
+                print(profile.display_name)
+                print(profile.user_id)
+                content += "{}".format(str(profile.display_name))
             line_bot_api.reply_message(
                 event.reply_token, 
                 TextSendMessage(text=content)
