@@ -40,6 +40,9 @@ def callback():
 
     return 200
 
+@app.route('/push')
+def push_test():
+    line_bot_api.push_message("Udaec266d77fb2b328a23f3743b66f181", TextSendMessage(text='Hello World!'))
 
 def pattern_mega(text):
     patterns = [
@@ -291,8 +294,8 @@ def panx():
 def handle_message(event):
     print("event.reply_token:", event.reply_token)
     print("event.message.text:", event.message.text)
-    if event.message.text == "test":
-        content = "ID: {}".format(event.source.user_id)
+    if event.message.text in ["Test", "test"]:
+        content = "User ID: {}\n".format(event.source.user_id)
         line_bot_api.reply_message(
             event.reply_token, 
             TextSendMessage(text=content)
